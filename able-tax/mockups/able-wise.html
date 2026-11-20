@@ -1,0 +1,579 @@
+<title>에이블 메인 시안 W</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap">
+<style>
+/* Layout: Wise skeleton (cream hero band → white cards, 24px pills, weight-900 display, calculator card as hero signature)
+   painted in the 에이블 시즌2 brand palette. Deliberately single light theme: this is the client's one brand world. */
+:root{
+  color-scheme:light;
+  --cream:#FBF8EC;      /* canvas-soft: page bands */
+  --white:#FFFFFF;      /* canvas: cards */
+  --ink:#14273D;        /* navy ink: text, dark bands */
+  --body:#3d4f63;       /* secondary body */
+  --mute:#5b6b7e;       /* fine print, ≥5:1 on cream */
+  --yel:#FFBF04;        /* golden yellow: the only CTA colour */
+  --yel-pale:#FFF1C2;   /* soft yellow feature tint */
+  --blue:#0165C3;       /* 에이블 블루: tags, links, one emphasis */
+  --mist:#DEEAF7;       /* info cards */
+  --line:#E7E1CC;
+  --on-dark:#DEEAF7; --on-dark-mute:#B9C4D1;
+  --display:"Noto Sans KR",system-ui,sans-serif;
+  --sans:"Noto Sans KR",system-ui,sans-serif;
+  --r-sm:8px; --r-md:12px; --r-xl:24px; --pill:9999px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--white)}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.band{padding-block:88px}
+.band.white{background:var(--white)}
+.band.ink{background:var(--ink);color:var(--on-dark)}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.eyebrow{font-size:14px;font-weight:700;color:var(--blue);letter-spacing:.02em}
+.ink .eyebrow{color:var(--yel)}
+.h-sec{font-family:var(--display);font-weight:900;font-size:clamp(32px,4.4vw,48px);line-height:1.15;letter-spacing:-.02em}
+.lead{font-size:20px;line-height:1.55;color:var(--body);max-width:44ch}
+.ink .lead{color:var(--on-dark-mute)}
+.sec-head{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+
+/* buttons: 24px pills, ~48px tall */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:12px 26px;border-radius:var(--r-xl);font:600 16px/1.5 var(--sans);text-decoration:none;cursor:pointer;border:0;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--yel);color:var(--ink)}
+.btn-primary:hover{background:#ffcb33}
+.btn-tertiary{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.ink .btn-tertiary{color:var(--cream);border-color:var(--cream)}
+.btn-secondary{background:var(--cream);color:var(--ink)}
+.btn-sm{min-height:42px;padding:8px 18px;font-size:15px}
+
+/* brand tag from reels guide: blue box, cream text, slanted right edge */
+.tag{display:inline-block;background:var(--blue);color:var(--cream);font-weight:700;font-size:15px;padding:7px 30px 7px 14px;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--white);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:68px}
+.logo{display:flex;align-items:baseline;gap:8px;text-decoration:none;font-weight:900;font-size:22px;letter-spacing:-.01em}
+.logo small{font-size:14px;font-weight:600;color:var(--body)}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;font-weight:600;font-size:15px}
+.nav ul a:hover{color:var(--blue)}
+
+/* ---------- hero ---------- */
+.hero{padding-block:72px 88px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero h1{font-family:var(--display);font-weight:900;font-size:clamp(38px,6vw,76px);line-height:1.06;letter-spacing:-.035em;margin:22px 0 24px}
+.hero h1 .hl{background:linear-gradient(transparent 62%,var(--yel) 62%);padding:0 4px}
+.hero .lead{margin-bottom:32px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--body)}
+.hero .proof span{background:var(--white);border-radius:var(--pill);padding:6px 14px;font-weight:600}
+
+/* calculator card: Wise currency-converter analogue */
+.calc{background:var(--white);border:1.5px solid var(--ink);border-radius:var(--r-xl);padding:24px;display:grid;gap:18px}
+.tabs{display:flex;gap:6px;background:var(--cream);border-radius:var(--pill);padding:5px}
+.tabs button{flex:1;border:0;background:transparent;border-radius:var(--pill);padding:10px 8px;font:600 15px var(--sans);color:var(--body);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--cream)}
+.field{display:grid;gap:8px}
+.field label{font-size:14px;font-weight:600;color:var(--body);display:flex;justify-content:space-between;gap:8px}
+.amount{display:flex;align-items:center;border:1.5px solid var(--ink);border-radius:var(--r-md);padding:4px 6px 4px 16px;gap:8px}
+.hero .wrap>*,.ceo .wrap>*,.quiz .wrap>*,.contact .wrap>*,.svc>*,.calc>*{min-width:0}
+.amount input{flex:1;min-width:0;width:100%;border:0;font:900 26px var(--sans);color:var(--ink);background:transparent;font-variant-numeric:tabular-nums;padding:8px 0}
+.amount input:focus{outline:none}
+.amount:focus-within{box-shadow:0 0 0 3px var(--mist)}
+.amount .unit{font-weight:700;color:var(--body);padding-right:10px}
+.step{display:flex;gap:6px;flex-wrap:wrap}
+.step button{border:0;background:var(--cream);border-radius:var(--pill);padding:6px 12px;font:600 13px var(--sans);color:var(--ink);cursor:pointer}
+.rows{display:grid;gap:0}
+.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;font-variant-numeric:tabular-nums}
+.row b{font-weight:700}
+.result{background:var(--yel);border-radius:var(--r-md);padding:16px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.result span{font-weight:700}
+.result{flex-wrap:wrap}
+.result b{font-weight:900;font-size:30px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;white-space:nowrap}
+.fine{font-size:13px;color:var(--mute);line-height:1.5}
+
+/* ---------- numbers ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{background:var(--cream);border-radius:var(--r-xl);padding:28px 24px;display:grid;gap:6px}
+.stat b{font-family:var(--display);font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat span{color:var(--body);font-weight:600}
+.partners{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center}
+.partners small{color:var(--mute);font-weight:600;margin-right:6px}
+.partners span{border:1px solid var(--line);border-radius:var(--pill);padding:6px 14px;font-size:14px;font-weight:600;color:var(--body)}
+
+/* ---------- CEO (dark band) ---------- */
+.ceo .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.ceo h2{color:var(--yel)}
+.portrait{aspect-ratio:4/5;border-radius:var(--r-xl);background:linear-gradient(160deg,#21405f,#0f1f31);display:grid;place-items:end start;padding:24px;color:var(--cream);max-width:100%}
+.portrait b{font-size:24px;font-weight:900}
+.portrait span{display:block;font-size:14px;color:var(--on-dark-mute)}
+.portrait .ph{font-size:13px;color:var(--on-dark-mute);border:1px dashed #3a5677;border-radius:var(--r-sm);padding:4px 10px;margin-bottom:auto}
+.cv{display:grid;gap:12px;margin-top:28px}
+.cv li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-top:1px solid #2a4260;list-style:none}
+.cv{padding:0;margin-bottom:0}
+.cv .y{color:var(--on-dark-mute);font-variant-numeric:tabular-nums;font-size:15px}
+.cv b{color:var(--cream);font-weight:700}
+.team{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.team span{background:#1d3550;border-radius:var(--pill);padding:7px 14px;font-size:14px;color:var(--on-dark)}
+
+/* ---------- services ---------- */
+.svc{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.card{background:var(--white);border-radius:var(--r-xl);padding:28px;display:grid;gap:14px;align-content:start}
+.card.feature{grid-row:span 2;background:var(--yel-pale)}
+.card h3{font-family:var(--display);font-weight:900;font-size:30px;letter-spacing:-.02em;line-height:1.2}
+.card .k{font-size:14px;font-weight:700;color:var(--blue)}
+.card ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.card li{padding-left:22px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--ink)}
+.subj{display:grid;gap:10px;margin-top:6px}
+.subj .tabs{background:var(--white)}
+.subj .pane{background:var(--white);border-radius:var(--r-md);padding:18px 20px;display:grid;gap:8px}
+.subj .pane p{color:var(--body);font-size:15px}
+.subj .pane b{color:var(--ink)}
+details{border-top:1px solid var(--line);padding-top:12px}
+details summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";font-size:22px;font-weight:400;line-height:1}
+details[open] summary::after{content:"−"}
+details .more{display:grid;gap:12px;padding-top:12px;color:var(--body);font-size:15px}
+details .more b{color:var(--ink)}
+
+/* ---------- quiz ---------- */
+.quiz .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.qbox{background:var(--white);border-radius:var(--r-xl);padding:28px;display:grid;gap:20px}
+.prog{display:flex;gap:6px}
+.prog i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.prog i.on{background:var(--ink)}
+.qbox h3{font-size:22px;font-weight:700;line-height:1.4}
+.qopts{display:grid;gap:10px}
+.qopts button{text-align:left;background:var(--cream);border:2px solid transparent;border-radius:var(--r-md);padding:16px 18px;font:600 16px/1.5 var(--sans);color:var(--ink);cursor:pointer;display:grid;gap:2px}
+.qopts button small{font-weight:400;font-size:14px;color:var(--body)}
+.qopts button:hover{border-color:var(--ink)}
+.qnav{display:flex;justify-content:space-between;gap:10px}
+.qres{display:grid;gap:14px}
+.qres .badge{justify-self:start;background:var(--ink);color:var(--yel);font-weight:700;font-size:14px;border-radius:var(--pill);padding:5px 14px}
+.qres h3{font-family:var(--display);font-weight:900;font-size:34px;letter-spacing:-.02em}
+.qres ul{margin:0;padding-left:20px;color:var(--body);display:grid;gap:6px}
+
+/* ---------- pricing ---------- */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.plan{background:var(--cream);border-radius:var(--r-xl);padding:28px;display:grid;gap:16px;align-content:start;grid-template-rows:auto auto auto 1fr auto}
+.plan.featured{background:var(--ink);color:var(--on-dark)}
+.plan .pn{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700}
+.plan .pill{background:var(--yel);color:var(--ink);font-size:13px;border-radius:var(--pill);padding:3px 12px}
+.plan .price{font-family:var(--display);font-weight:900;font-size:40px;letter-spacing:-.03em;line-height:1}
+.plan .price small{font-size:16px;font-weight:600;letter-spacing:0}
+.plan.featured .price{color:var(--yel)}
+.plan .who{color:var(--body);font-size:15px}
+.plan.featured .who{color:var(--on-dark-mute)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px}
+.plan li{display:grid;grid-template-columns:20px 1fr;gap:6px}
+.plan li::before{content:"✓";font-weight:900}
+.plan.featured li::before{color:var(--yel)}
+.plan .btn{width:100%}
+.plans-note{margin-top:18px}
+
+/* ---------- calendar ---------- */
+.cal{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ev{background:var(--white);border-radius:var(--r-xl);padding:22px;display:grid;gap:6px;align-content:start}
+.ev .d{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;letter-spacing:-.02em}
+.ev .left{font-size:13px;font-weight:700;color:var(--blue)}
+.ev h3{font-size:17px;font-weight:700}
+.ev p{font-size:14px;color:var(--body)}
+.ev.med{background:var(--ink);color:var(--on-dark)}
+.ev.med .left{color:var(--yel)} .ev.med p{color:var(--on-dark-mute)}
+.ev .chip{justify-self:start;font-size:12px;font-weight:700;border-radius:var(--pill);padding:2px 10px;background:var(--mist);color:var(--ink)}
+.ev.med .chip{background:var(--yel)}
+
+/* ---------- learn ---------- */
+.learn{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lc{background:var(--cream);border-radius:var(--r-xl);overflow:hidden;display:grid;text-decoration:none}
+.lc .th{aspect-ratio:16/9;background:var(--ink);color:var(--cream);padding:18px;display:flex;flex-direction:column;justify-content:flex-end;font-weight:900;font-size:22px;line-height:1.25;letter-spacing:-.01em}
+.lc .th span{color:var(--yel)}
+.lc .tx{padding:18px 20px;display:grid;gap:4px}
+.lc .tx small{color:var(--blue);font-weight:700}
+.lc .tx b{font-size:16px;line-height:1.45}
+
+/* ---------- reviews ---------- */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rv{background:var(--white);border-radius:var(--r-xl);padding:26px;display:grid;gap:14px;align-content:space-between}
+.rv blockquote{margin:0;font-size:16px;line-height:1.7}
+.rv blockquote b{background:linear-gradient(transparent 60%,var(--yel-pale) 60%)}
+.rv .by{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--body)}
+.rv .by i{width:36px;height:36px;border-radius:50%;background:var(--mist);display:grid;place-items:center;font-style:normal;font-weight:900;color:var(--ink)}
+.todo{display:inline-block;font-size:12px;font-weight:700;background:var(--mist);color:var(--ink);border-radius:var(--pill);padding:3px 10px;margin-left:8px;vertical-align:middle}
+
+/* ---------- contact ---------- */
+.contact .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+.form{background:var(--white);border-radius:var(--r-xl);padding:32px;display:grid;gap:16px}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form label{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--body)}
+.form input,.form select,.form textarea{width:100%;border:1.5px solid var(--ink);border-radius:var(--r-md);padding:12px 16px;font:400 16px var(--sans);color:var(--ink);background:var(--white)}
+.form textarea{min-height:110px;resize:vertical}
+.form .agree{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px}
+.form .agree input{width:20px;height:20px;margin-top:2px;accent-color:var(--ink)}
+.form .msg{font-size:14px;font-weight:600;color:var(--blue)}
+.info{display:grid;gap:16px}
+.info .card{padding:24px}
+.info .card h3{font-family:var(--sans);font-size:18px;font-weight:700;letter-spacing:0}
+.info .big{font-size:26px;font-weight:900;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.info .card p{color:var(--body);font-size:15px}
+.info .kakao{background:var(--yel);}
+.info .kakao p{color:var(--ink)}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--on-dark-mute);font-size:14px;padding-block:56px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+footer .logo{color:var(--cream)}
+footer h4{margin:0 0 10px;color:var(--cream);font-size:14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none}
+footer .legal{grid-column:1/-1;border-top:1px solid #2a4260;padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* single floating action: Kakao */
+.fab{position:fixed;right:max(20px,calc(env(safe-area-inset-right,0px) + 20px));bottom:calc(env(safe-area-inset-bottom,0px) + 20px);z-index:40;background:var(--yel);color:var(--ink);border-radius:var(--pill);padding:14px 20px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(20,39,61,.25)}
+
+@media (max-width:1023px){
+  .nav ul{display:none}
+  .hero .wrap,.ceo .wrap,.quiz .wrap,.contact .wrap{grid-template-columns:1fr}
+  .stats,.cal{grid-template-columns:repeat(2,1fr)}
+  .svc{grid-template-columns:1fr}.card.feature{grid-row:auto}
+  .plans,.learn,.reviews{grid-template-columns:1fr}
+  .portrait{max-width:360px}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .band{padding-block:64px}
+  .hero{padding-block:40px 64px}
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .stats,.cal{grid-template-columns:1fr 1fr}
+  .form .two{grid-template-columns:1fr}
+  .nav .btn{display:none}
+  .lead{font-size:18px}
+  .cv li{grid-template-columns:1fr;gap:2px}
+  footer .wrap{grid-template-columns:1fr}
+  .fab{padding:12px 16px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">ABLE <small>에이블세무회계</small></a>
+    <nav aria-label="주 메뉴"><ul>
+      <li><a href="#about">대표 소개</a></li><li><a href="#services">서비스</a></li><li><a href="#plans">요금제</a></li><li><a href="#tools">세무 도구</a></li><li><a href="#learn">절세 특강</a></li>
+    </ul></nav>
+    <a class="btn btn-primary btn-sm" href="#contact">무료 상담 신청</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div class="wrap">
+      <div>
+        <span class="tag">병의원 원장님 필독!</span>
+        <h1 id="h-hero">진료에만 전념하세요.<br>세무는 <span class="hl">에이블이</span> 해결합니다</h1>
+        <p class="lead">비급여 매출 소명, 페이닥터 네트 계약, 의료장비 세액공제, MSO 전환까지. 빅4 세무본부 출신 회계사가 원장님 장부를 직접 검수해요.</p>
+        <div class="ctas"><a class="btn btn-primary" href="#quiz">3분 세무 자가진단</a><a class="btn btn-tertiary" href="#contact">무료 상담 신청</a></div>
+        <div class="proof"><span>전국 병의원 300곳+ 전담</span><span>대표회계사 100% 최종 검수</span></div>
+      </div>
+
+      <div class="calc" id="tools" aria-label="절세 계산기">
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-calc="corp" id="t-corp">법인전환</button>
+          <button role="tab" aria-selected="false" data-calc="vat" id="t-vat">부가세</button>
+        </div>
+
+        <div data-pane="corp">
+          <div class="field">
+            <label for="c-in"><span>개인사업자 연 순이익</span></label>
+            <div class="amount"><input id="c-in" inputmode="numeric" value="12,000" aria-describedby="c-unit"><span class="unit" id="c-unit">만 원</span></div>
+            <div class="step"><button type="button" data-add="-1000">-1,000만</button><button type="button" data-add="1000">+1,000만</button><button type="button" data-add="5000">+5,000만</button></div>
+          </div>
+          <div class="rows" style="margin-top:14px">
+            <div class="row"><span>지금 내는 종합소득세</span><b id="c-p">-</b></div>
+            <div class="row"><span>법인 전환 후 법인세</span><b id="c-c">-</b></div>
+          </div>
+          <div class="result" style="margin-top:14px"><span>1년에 아낄 수 있는 세금</span><b id="c-s">-</b></div>
+        </div>
+
+        <div data-pane="vat" hidden>
+          <div class="field">
+            <label for="v-s"><span>분기 매출</span></label>
+            <div class="amount"><input id="v-s" inputmode="numeric" value="5,000"><span class="unit">만 원</span></div>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="v-b"><span>분기 매입 (세금계산서 등)</span></label>
+            <div class="amount"><input id="v-b" inputmode="numeric" value="3,000"><span class="unit">만 원</span></div>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="v-r"><span>비급여(과세) 매출 비중</span><b id="v-rv">50%</b></label>
+            <input id="v-r" type="range" min="0" max="100" step="5" value="50" style="accent-color:var(--ink)">
+          </div>
+          <div class="result" style="margin-top:14px"><span>예상 납부 부가세</span><b id="v-out">-</b></div>
+        </div>
+
+        <p class="fine">지방세 10% 포함 개략 계산이에요. 실제 세액은 대표 급여, 공제 항목에 따라 달라져요. 네트제 급여 역산 계산기도 그대로 옮겨요.</p>
+        <a class="btn btn-primary" href="#contact">이 결과로 무료 검토 받기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="band white" aria-labelledby="h-num">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">숫자로 보는 에이블</span><h2 class="h-sec" id="h-num">병의원 세무, 이미 300곳이 맡겼어요</h2></div>
+      <div class="stats">
+        <div class="stat"><b>300+</b><span>병의원 전담 기장</span></div>
+        <div class="stat"><b>24건</b><span>세무조사 방어 성공</span></div>
+        <div class="stat"><b>32%</b><span>평균 세액 절감율</span></div>
+        <div class="stat"><b>99.8%</b><span>성실신고 무사고율</span></div>
+      </div>
+      <div class="partners"><small>함께하는 곳</small><span>365바른치과의원</span><span>다시봄날의원</span><span>아비쥬의원</span><span>유앤아이의원</span><span>자생한방병원</span><span>잠실서울안과</span><span>톡스앤필의원</span><span>더클코리아스튜디오</span></div>
+    </div>
+  </section>
+
+  <!-- CEO -->
+  <section class="band ink ceo" id="about" aria-labelledby="h-ceo">
+    <div class="wrap">
+      <div class="portrait"><span class="ph">대표님 실제 사진 자리</span><div><b>고혜진 대표회계사</b><span>공인회계사 · 세무대리인 (2015)</span></div></div>
+      <div>
+        <span class="eyebrow">대표 회계사</span>
+        <h2 class="h-sec" style="margin:14px 0 18px" id="h-ceo">대기업 세무조사를 막던 회계사가 원장님 장부를 직접 봐요</h2>
+        <p class="lead">세무 대리인이 누구냐에 따라 내는 세금이 달라져요. 빅4 회계법인 세무본부에서 쌓은 실무를 병의원 눈높이로 전해요.</p>
+        <ul class="cv">
+          <li><span class="y">2019–2021</span><span><b>KPMG 삼정회계법인</b> 세무자문본부</span></li>
+          <li><span class="y">2015–2018</span><span><b>EY 안진회계법인</b> 세무자문본부</span></li>
+          <li><span class="y">2024</span><span><b>벤처기업협회</b> 세무회계 만족도 1위 (4.92 / 5.0)</span></li>
+          <li><span class="y">2023</span><span><b>예비창업패키지</b> 세무회계 공식 강사 · 평가위원</span></li>
+        </ul>
+        <div class="team" aria-label="함께하는 회계사"><span>보배감사반(554호) 회계사 4인 협업</span><span>정상원 CPA</span><span>황주미 CPA</span><span>신미정 CPA</span><span>이은정 CPA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="band" id="services" aria-labelledby="h-svc">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">업종별 서비스</span><h2 class="h-sec" id="h-svc">업종마다 세금 쟁점이 달라요</h2></div>
+      <div class="svc">
+        <article class="card feature">
+          <span class="k">병의원 · 핵심 서비스</span>
+          <h3>소득률에 억지로 맞춘 신고는 그만</h3>
+          <ul>
+            <li>분기 가결산으로 종합소득세를 미리 예측해요</li>
+            <li>국세청 시각으로 연 2회 사전 모의 세무조사를 해요</li>
+            <li>MSO 설립 타당성과 자산·증여 구조를 설계해요</li>
+            <li>조사 통보 시 국세청 출신 세무사, 변호사와 현장 동행해요</li>
+          </ul>
+          <div class="subj">
+            <div class="tabs" role="tablist" aria-label="진료과목">
+              <button role="tab" aria-selected="true" data-s="0">피부·성형</button><button role="tab" aria-selected="false" data-s="1">치과</button><button role="tab" aria-selected="false" data-s="2">정형·통증</button><button role="tab" aria-selected="false" data-s="3">한의원</button>
+            </div>
+            <div class="pane" id="subj-pane" aria-live="polite"></div>
+          </div>
+          <details><summary>개원부터 세무조사까지, 5대 절세 프레임워크</summary>
+            <div class="more">
+              <p><b>개원·자금 조달</b> 공동개원 출자 비율과 손익분배 비율이 다르면 증여세 위험이 생겨요. 닥터론은 실제 필요경비 결제와 통장 내역이 맞아야 해요.</p>
+              <p><b>페이닥터 네트 계약</b> 세후 고정급을 세전으로 환산해 신고하지 않으면 나중에 큰 추징이 나올 수 있어요.</p>
+              <p><b>장비 리스·인테리어</b> 리스 형태에 맞춘 감가상각 배분, 부가세 조기환급으로 개원 초기 자금을 확보해요.</p>
+              <p><b>MSO 구조화</b> 용역수수료가 시가를 넘거나 증빙이 부족하면 부인돼요. 거래 증빙을 묶어서 관리해요.</p>
+              <p><b>세무조사 사전 차단</b> 같은 지역 같은 과 평균 소득률과 비교해 조사 대상 선정 위험을 미리 조정해요.</p>
+            </div>
+          </details>
+          <a class="btn btn-primary" href="#contact" style="justify-self:start">병의원 상담 신청</a>
+        </article>
+        <article class="card">
+          <span class="k">스타트업</span>
+          <h3>지원금부터 TIPS 투자까지</h3>
+          <ul><li>예창패, 청창사, TIPS 집행 증빙</li><li>창업중소기업 세액감면 최대 100%</li><li>VC 실사용 K-GAAP 장부</li></ul>
+        </article>
+        <article class="card">
+          <span class="k">크리에이터</span>
+          <h3>구독자가 늘어도 세금 걱정은 그대로</h3>
+          <ul><li>청년 창업 소득세 최대 100% 감면 검토</li><li>애드센스 외화 수입 영세율, 출처 소명</li><li>더클코리아스튜디오 전속 세무대리</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="band white quiz" id="quiz" aria-labelledby="h-quiz">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:0"><span class="eyebrow">세무 자가진단</span><h2 class="h-sec" id="h-quiz">3문항이면 우리 병원에 맞는 플랜이 나와요</h2><p class="lead">개인정보는 묻지 않아요. 결과를 보고 상담할지 정하시면 돼요.</p></div>
+      <div class="qbox" style="background:var(--cream)" aria-live="polite">
+        <div class="prog" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+        <div id="q-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="band" id="plans" aria-labelledby="h-plan">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">2026 기장 요금제</span><h2 class="h-sec" id="h-plan">필요한 만큼만 고르세요</h2></div>
+      <div class="plans">
+        <div class="plan" style="background:var(--white)"><div class="pn">일반 세무기장</div><div class="price">10만 원~<small> / 월</small></div><p class="who">개인 10만 원~, 법인 15만 원~</p>
+          <ul><li>부가세, 종소세, 법인세 신고</li><li>급여명세서, 4대보험 관리</li><li>회계사 1:1 절세 상담</li></ul><a class="btn btn-tertiary" href="#contact">상담 신청</a></div>
+        <div class="plan featured"><div class="pn">프리미엄 자동화 <span class="pill">추천</span></div><div class="price">50만 원~<small> / 월</small></div><p class="who">세금계산서 발행이 잦은 성장기 사업장</p>
+          <ul><li>일반 세무기장 전체</li><li>세금계산서 예약·반복 발행</li><li>입금 내역 자동 매칭, 미수금 알림</li><li>홈택스, 전 계좌 거래 자동 수집</li></ul><a class="btn btn-primary" href="#contact">상담 신청</a></div>
+        <div class="plan" style="background:var(--white)"><div class="pn">VIP 경리아웃소싱</div><div class="price">200만 원~<small> / 월</small></div><p class="who">경리 채용이 부담스러운 법인</p>
+          <ul><li>프리미엄 자동화 전체</li><li>인사·노무, 급여 지급 대행</li><li>매월 손익·자금 분석 리포트</li><li>세무조사 시뮬레이션</li></ul><a class="btn btn-tertiary" href="#contact">상담 신청</a></div>
+      </div>
+      <p class="fine plans-note">연 1회 조정료와 부가세는 별도예요. 사업 규모와 거래 건수에 따라 상담 후 확정돼요.</p>
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="band white" aria-labelledby="h-cal">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">세무 캘린더</span><h2 class="h-sec" id="h-cal">다가오는 마감, 에이블이 챙겨요</h2></div>
+      <div class="cal" id="cal"></div>
+    </div>
+  </section>
+
+  <!-- LEARN -->
+  <section class="band" id="learn" aria-labelledby="h-learn">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">일단고! 회계사 · 세무 칼럼</span><h2 class="h-sec" id="h-learn">영상과 칼럼으로 먼저 알아보세요</h2></div>
+      <div class="learn">
+        <a class="lc" href="#learn" style="background:var(--white)"><div class="th">사업자 등록할 때<span>세금 폭탄 피하는 법</span></div><div class="tx"><small>유튜브 · 11:03</small><b>사업자 등록 시 세금 폭탄 피하는 핵심 비법</b></div></a>
+        <a class="lc" href="#learn" style="background:var(--white)"><div class="th">개인 vs 법인<span>뭐가 유리할까?</span></div><div class="tx"><small>유튜브 · 10:15</small><b>개인사업자 vs 법인사업자 차이와 선택 기준</b></div></a>
+        <a class="lc" href="#learn" style="background:var(--white)"><div class="th">성실신고 병의원<span>추징 사례</span></div><div class="tx"><small>칼럼 · 2024.12.04</small><b>성실신고대상 병의원 기장 선정 기준과 추징 사례</b></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="band white" aria-labelledby="h-rv">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">고객 후기</span><h2 class="h-sec" id="h-rv">원장님들이 직접 남긴 이야기<span class="todo">실제 후기로 교체 예정</span></h2></div>
+      <div class="reviews">
+        <figure class="rv" style="background:var(--cream);margin:0"><blockquote>"갑작스러운 소명 요구에 공황 상태였는데, 평소 셋업해 둔 장부 덕분에 <b>추가 가산세 없이</b> 소명을 끝냈어요."</blockquote><figcaption class="by"><i>최</i>피부과·성형외과 대표원장</figcaption></figure>
+        <figure class="rv" style="background:var(--cream);margin:0"><blockquote>"페이닥터 네트 계약 급여 대장을 깔끔하게 정리했고, <b>정기 세무조사도 무난히</b> 마쳤어요."</blockquote><figcaption class="by"><i>박</i>통증의학과 대표원장</figcaption></figure>
+        <figure class="rv" style="background:var(--cream);margin:0"><blockquote>"임플란트 선수금 시점 문제를 판례로 소명했고, 경정청구로 <b>잘못 낸 세금도 돌려받았어요.</b>"</blockquote><figcaption class="by"><i>이</i>치과 대표원장</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="band contact" id="contact" aria-labelledby="h-ct">
+    <div class="wrap">
+      <form class="form" id="form" novalidate>
+        <div style="display:grid;gap:10px"><span class="eyebrow">무료 상담 신청</span><h2 class="h-sec" id="h-ct" style="font-size:clamp(28px,3.4vw,40px)">담당 회계사가 직접 전화드려요</h2></div>
+        <div class="two">
+          <label for="f-name">대표자명 / 병원명<input id="f-name" required autocomplete="organization" placeholder="예: 홍길동 / 에이블의원"></label>
+          <label for="f-tel">연락처<input id="f-tel" required type="tel" autocomplete="tel" placeholder="010-0000-0000"></label>
+        </div>
+        <div class="two">
+          <label for="f-type">업종<select id="f-type"><option>병의원 / 의료기관</option><option>스타트업 / IT</option><option>크리에이터 / 서비스</option><option>제조 / 유통</option><option>상속·증여, 자산 설계</option><option>기타</option></select></label>
+          <label for="f-plan">관심 플랜<select id="f-plan"><option>상담 후 결정</option><option>일반 세무기장</option><option>프리미엄 자동화</option><option>VIP 경리아웃소싱</option></select></label>
+        </div>
+        <label for="f-msg">궁금한 점 (선택)<textarea id="f-msg" placeholder="예: 내년 공동개원 예정인데 지분 설계가 궁금해요"></textarea></label>
+        <label class="agree" for="f-agree"><input id="f-agree" type="checkbox" required><span>상담 목적으로만 쓰는 개인정보 수집·이용에 동의해요 (필수)</span></label>
+        <button class="btn btn-primary" type="submit">무료 상담 신청</button>
+        <p class="msg" id="f-msg-out" role="status"></p>
+      </form>
+      <div class="info">
+        <div class="card kakao"><h3>카카오톡으로 바로 물어보기</h3><p>평일 09:30–18:00, 회계사가 직접 답해요.</p><a class="btn" style="background:var(--ink);color:var(--cream);justify-self:start" href="http://pf.kakao.com/_ixhxdRG/chat" target="_blank" rel="noopener">카카오톡 상담</a></div>
+        <div class="card"><h3>전화</h3><div class="big">02-6953-0396</div><p>평일 09:30–18:00 · 주말·공휴일 휴무</p></div>
+        <div class="card"><h3>오시는 길</h3><p>서울 서초구 서초중앙로 26길 13, 도성빌딩 6층<br>교대역 4번 출구 도보 5분</p><a class="btn btn-secondary btn-sm" style="justify-self:start" href="https://map.naver.com/p/search/%EC%97%90%EC%9D%B4%EB%B8%94%EC%84%B8%EB%AC%B4%ED%9A%8C%EA%B3%84/place/1939917915" target="_blank" rel="noopener">네이버 지도에서 보기</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:grid;gap:12px"><span class="logo">ABLE <small style="color:var(--on-dark-mute)">에이블세무회계</small></span><p>빅4 회계법인 세무본부 출신 회계사가 이끄는 병의원·스타트업 전문 세무회계</p></div>
+    <div><h4>바로가기</h4><ul><li><a href="#about">대표 소개</a></li><li><a href="#services">서비스</a></li><li><a href="#plans">요금제</a></li><li><a href="#quiz">자가진단</a></li></ul></div>
+    <div><h4>채널</h4><ul><li><a href="https://www.youtube.com/@%EC%9D%BC%EB%8B%A8%EA%B3%A0%ED%9A%8C%EA%B3%84%EC%82%AC" target="_blank" rel="noopener">유튜브 일단고! 회계사</a></li><li><a href="https://www.instagram.com/able.tax" target="_blank" rel="noopener">인스타그램</a></li><li><a href="https://blog.naver.com/kohhyejin" target="_blank" rel="noopener">네이버 블로그</a></li></ul></div>
+    <div class="legal"><span>에이블세무회계 · 대표 고혜진 · 사업자등록번호 370-11-02238 · 서울 서초구 서초중앙로 26길 13, 6층</span><span>© 2026 에이블세무회계</span></div>
+  </div>
+</footer>
+
+<a class="fab" href="http://pf.kakao.com/_ixhxdRG/chat" target="_blank" rel="noopener">카카오톡 상담</a>
+
+<script>
+const fmt=n=>Math.round(n).toLocaleString('ko-KR');
+const parse=s=>+String(s).replace(/[^0-9]/g,'')||0;
+// 종소세(누진, 지방세 포함) vs 법인세(9%/19%, 지방세 포함), 단위 만 원
+function incomeTax(n){const br=[[1400,.06,0],[5000,.15,126],[8800,.24,576],[15000,.35,1544],[30000,.38,1994],[50000,.40,2594],[1e9,.42,3594]];for(const [l,r,d] of br){if(n<=l)return Math.max(0,(n*r-d)*1.1)}}
+function corpTax(n){return (n<=20000?n*.09:1800+(n-20000)*.19)*1.1}
+
+const cIn=document.getElementById('c-in');
+function calcCorp(){const n=parse(cIn.value),p=incomeTax(n),c=corpTax(n);
+  document.getElementById('c-p').textContent=fmt(p)+'만 원';document.getElementById('c-c').textContent=fmt(c)+'만 원';document.getElementById('c-s').textContent=fmt(Math.max(0,p-c))+'만 원'}
+cIn.addEventListener('input',()=>{const v=parse(cIn.value);cIn.value=v?fmt(v):'';calcCorp()});
+document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>{cIn.value=fmt(Math.max(0,parse(cIn.value)+ +b.dataset.add));calcCorp()}));
+calcCorp();
+
+const vS=document.getElementById('v-s'),vB=document.getElementById('v-b'),vR=document.getElementById('v-r');
+function calcVat(){const s=parse(vS.value),b=parse(vB.value),r=+vR.value/100;
+  document.getElementById('v-rv').textContent=vR.value+'%';
+  document.getElementById('v-out').textContent=fmt(Math.max(0,(s*r-b*r)*.1))+'만 원'}
+[vS,vB].forEach(el=>el.addEventListener('input',()=>{const v=parse(el.value);el.value=v?fmt(v):'';calcVat()}));
+vR.addEventListener('input',calcVat);calcVat();
+
+document.querySelectorAll('.calc .tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.calc .tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==b.dataset.calc)}));
+
+// 진료과목별 쟁점
+const SUBJ=[
+ ['비급여 집중형','<b>비급여 매출</b> 고액 패키지 결제의 카드·현금 비율을 분석해 소명을 막아요.','<b>현금영수증</b> 10만 원 이상 비급여 시술 의무발행 위반 가산세를 관리해요.'],
+ ['선수금 관리형','<b>임플란트 매출 시점</b> 선결제 시점과 보철 장착 완료 시점을 대조해 귀속 오류를 막아요.','<b>기공물 매입</b> 기공소 세금계산서와 시술 건수를 맞춰 봐요.'],
+ ['도수치료 특화','<b>도수치료 매출</b> 실손 청구 비율과 인건비 대비 매출 흐름을 진단해요.','<b>물리치료사 성과급</b> 건당 수수료를 급여로 처리하고 퇴직금을 계산해요.'],
+ ['원가·재고 관리형','<b>한약재 원가</b> 첩약 원료 계산서와 매출 원가를 조율해요.','<b>추나요법</b> 건보 적용 횟수 제한에 맞춰 급여 매출을 확인해요.']];
+const pane=document.getElementById('subj-pane');
+function showSubj(i){pane.innerHTML='<span class="k" style="font-size:13px;font-weight:700;color:var(--blue)">'+SUBJ[i][0]+'</span><p>'+SUBJ[i][1]+'</p><p>'+SUBJ[i][2]+'</p>'}
+document.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-s]').forEach(x=>x.setAttribute('aria-selected',x===b));showSubj(+b.dataset.s)}));
+showSubj(0);
+
+// 자가진단
+const Q=[
+ {q:'진료 매출에서 비급여 비중은 어느 쪽인가요?',o:[['비급여 비중이 높아요','피부과, 성형외과 등'],['건보 급여 비중이 높아요','치과, 내과, 통증의학과 등']]},
+ {q:'의료진 구성은 어떻게 되나요?',o:[['단독 개원 또는 페이닥터 1~2명','네트 계약 원천세 점검이 중요해요'],['공동개원 또는 의사 3명 이상','지분 설계, MSO 검토가 필요해요']]},
+ {q:'가까운 시일 내 큰 투자 계획이 있나요?',o:[['당분간 없어요','안정기 정기 관리'],['개원, 리모델링, 장비 매입 예정','투자세액공제, 조기환급 기회']]}];
+const PLAN=[
+ {n:'일반 세무기장',p:'월 10만 원~',w:['정기 신고와 1:1 절세 상담','성실신고확인대상 진입 대비 관리']},
+ {n:'프리미엄 자동화',p:'월 50만 원~',w:['계산서 발행·입금 대조 자동화','분기 가결산으로 세액 미리 예측']},
+ {n:'VIP 경리아웃소싱',p:'월 200만 원~',w:['급여·노무까지 통째로 대행','매월 손익 리포트와 세무조사 시뮬레이션']}];
+let step=0,ans=[];
+const qb=document.getElementById('q-body'),bars=document.querySelectorAll('.prog i');
+function renderQ(){
+  bars.forEach((b,i)=>b.classList.toggle('on',i<=Math.min(step,2)));
+  if(step<3){const it=Q[step];
+    qb.innerHTML='<div style="display:grid;gap:16px"><span class="eyebrow">질문 '+(step+1)+' / 3</span><h3>'+it.q+'</h3><div class="qopts">'+it.o.map((o,i)=>'<button type="button" data-a="'+i+'">'+o[0]+'<small>'+o[1]+'</small></button>').join('')+'</div>'+(step?'<div class="qnav"><button class="btn btn-secondary btn-sm" type="button" id="q-back" style="background:var(--white)">이전</button></div>':'')+'</div>';
+    qb.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{ans[step]=+b.dataset.a;step++;renderQ()}));
+    const bk=document.getElementById('q-back');if(bk)bk.addEventListener('click',()=>{step--;renderQ()});
+  }else{const s=ans.reduce((a,b)=>a+b,0),p=PLAN[s>=2?2:s];
+    qb.innerHTML='<div class="qres"><span class="badge">진단 결과</span><h3>'+p.n+'</h3><p style="color:var(--body)">'+p.p+' · 이런 점을 먼저 챙겨요</p><ul>'+p.w.map(x=>'<li>'+x+'</li>').join('')+'</ul><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="#contact">이 결과로 상담 신청</a><button class="btn btn-tertiary" type="button" id="q-re">다시 하기</button></div></div>';
+    document.getElementById('q-re').addEventListener('click',()=>{step=0;ans=[];renderQ()});
+  }}
+renderQ();
+
+// 세무 캘린더 (주말·공휴일 연장 전 원래 기한)
+const EV=[
+ {d:'2026-11-30',t:'종합소득세 중간예납',p:'작년 소득 기준 중간예납 납부',c:'개인사업자'},
+ {d:'2026-12-10',t:'원천세 신고',p:'페이닥터·직원 급여, 프리랜서 3.3%',c:'전체'},
+ {d:'2027-01-25',t:'2기 부가세 확정신고',p:'비급여 과세 매출이 있는 병의원',c:'과세 병의원'},
+ {d:'2027-02-10',t:'사업장현황신고',p:'면세 병의원의 1년 수입 신고',c:'병의원 필수',m:1},
+ {d:'2027-03-10',t:'지급명세서 제출',p:'직원 연말정산 결과 제출',c:'전체'},
+ {d:'2027-05-31',t:'종합소득세 확정신고',p:'성실신고확인대상은 6월 30일까지',c:'개인사업자'}];
+const t0=new Date();t0.setHours(0,0,0,0);
+const up=EV.map(e=>({...e,dt:new Date(e.d+'T00:00:00')})).filter(e=>e.dt>=t0).slice(0,4);
+document.getElementById('cal').innerHTML=up.map(e=>{const l=Math.round((e.dt-t0)/864e5);return '<div class="ev'+(e.m?' med':'')+'"><div class="d">'+(e.dt.getMonth()+1)+'.'+e.dt.getDate()+'</div><div class="left">'+(l?'D-'+l:'오늘 마감')+'</div><h3>'+e.t+'</h3><p>'+e.p+'</p><span class="chip">'+e.c+'</span></div>'}).join('');
+
+// 폼: 시안이라 전송하지 않음
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();
+  const ok=document.getElementById('f-name').value.trim()&&document.getElementById('f-tel').value.trim()&&document.getElementById('f-agree').checked;
+  document.getElementById('f-msg-out').textContent=ok?'시안이라 실제로 전송되지는 않아요. 완성본에서는 지금처럼 구글 시트로 접수돼요.':'이름, 연락처, 개인정보 동의를 채워 주세요.'});
+</script>
