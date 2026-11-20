@@ -1,0 +1,270 @@
+<title>에이블 리디자인 시안</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@500;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: three stacked full-width mockups, each a self-contained visual world, with a quiet page shell around them */
+:root{
+  --bg:#f3f4f6; --fg:#1b1f27; --muted:#5d6472; --line:#d9dce2; --chip:#ffffff;
+  --sans:"Noto Sans KR",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14161b;--fg:#e8eaee;--muted:#9aa1ad;--line:#2b2f37;--chip:#1e2128;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14161b;--fg:#e8eaee;--muted:#9aa1ad;--line:#2b2f37;--chip:#1e2128;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px}
+.shell{max-width:1120px;margin:0 auto;display:grid;gap:56px}
+.intro h1{font-size:1.6rem;margin:0 0 6px;text-wrap:balance}
+.intro p{margin:0;color:var(--muted);max-width:62ch}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.jump a{background:var(--chip);border:1px solid var(--line);color:var(--fg);text-decoration:none;padding:6px 14px;border-radius:999px;font-size:.9rem}
+.jump a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.label{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:14px}
+.label b{font-size:1.15rem}
+.label span{color:var(--muted);font-size:.95rem}
+.frame{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.frame *{min-width:0}
+
+/* ===== A: 클리닉 화이트 ===== */
+.a{--a-bg:#FBF8EC;--a-soft:#DEEAF7;--a-ink:#14273D;--a-mute:#4f6176;--a-acc:#0165C3;--a-line:#e4e0cf;--a-yel:#FFBF04;
+  background:var(--a-bg);color:var(--a-ink);font-family:"Noto Sans KR",sans-serif}
+.a nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 32px;border-bottom:1px solid var(--a-line);flex-wrap:wrap}
+.a .logo{font-weight:800;letter-spacing:.02em}
+.a .logo small{font-weight:500;color:var(--a-mute);margin-left:6px}
+.a nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.92rem;color:var(--a-mute);flex-wrap:wrap}
+.a mark{background:linear-gradient(transparent 58%,var(--a-yel) 58%);color:inherit;padding:0 2px}
+.a .btn{background:var(--a-acc);color:#FBF8EC;border:0;border-radius:8px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer}
+.a .btn.ghost{background:transparent;color:var(--a-acc);border:1.5px solid var(--a-acc)}
+.a .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;padding:64px 32px 48px;align-items:center}
+.a .eyebrow{color:var(--a-acc);font-weight:700;font-size:.85rem;letter-spacing:.06em}
+.a h2{font-size:2.4rem;line-height:1.3;margin:10px 0 16px;font-weight:800;text-wrap:balance}
+.a .lead{color:var(--a-mute);font-size:1.05rem;max-width:44ch;margin:0 0 24px}
+.a .ctas{display:flex;gap:10px;flex-wrap:wrap}
+.a .card{background:var(--a-soft);border-radius:14px;padding:24px;display:grid;gap:16px}
+.a .stat{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--a-line);padding-bottom:12px}
+.a .stat:last-child{border:0;padding:0}
+.a .stat b{font-size:1.8rem;font-variant-numeric:tabular-nums;color:var(--a-acc)}
+.a .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 32px 56px}
+.a .svc div{background:#fffdf6;border:1px solid var(--a-line);border-radius:12px;padding:22px}
+.a .svc h3{margin:0 0 6px;font-size:1.1rem}
+.a .svc p{margin:0;color:var(--a-mute);font-size:.93rem}
+.a .quiz{background:var(--a-soft);padding:40px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.a .quiz h3{font-size:1.4rem;margin:0 0 6px}
+.a .quiz p{margin:0;color:var(--a-mute)}
+.a .opts{display:grid;gap:10px}
+.a .opts button{background:#fff;border:1.5px solid var(--a-line);border-radius:10px;padding:14px 16px;text-align:left;font:inherit;color:var(--a-ink);cursor:pointer}
+.a .opts button[aria-pressed="true"]{border-color:var(--a-acc);box-shadow:inset 0 0 0 1px var(--a-acc)}
+.a .opts small{display:block;color:var(--a-mute)}
+
+/* ===== B: 프라이빗 뱅킹 ===== */
+.b{--b-bg:#14273D;--b-panel:#1b3350;--b-ink:#FBF8EC;--b-mute:#b4c0cd;--b-brass:#FFBF04;--b-line:#2a4260;
+  background:var(--b-bg);color:var(--b-ink);font-family:"Noto Sans KR",sans-serif}
+.b nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 40px;flex-wrap:wrap}
+.b .logo{font-family:"Noto Serif KR",serif;font-weight:700;font-size:1.15rem;letter-spacing:.08em}
+.b nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:.9rem;color:var(--b-mute);flex-wrap:wrap}
+.b .btn{background:var(--b-brass);color:#14273D;border:0;border-radius:2px;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer}
+.b .btn.ghost{background:transparent;color:var(--b-ink);border:1px solid var(--b-line)}
+.b .hero{padding:72px 40px 56px;display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:end;border-bottom:1px solid var(--b-line)}
+.b .eyebrow{color:var(--b-brass);font-size:.82rem;letter-spacing:.18em}
+.b h2{font-family:"Noto Serif KR",serif;font-weight:700;font-size:2.6rem;line-height:1.35;margin:14px 0 18px;text-wrap:balance}
+.b .lead{color:var(--b-mute);max-width:46ch;margin:0 0 28px}
+.b .ctas{display:flex;gap:10px;flex-wrap:wrap}
+.b .ceo{border-left:1px solid var(--b-brass);padding-left:20px;display:grid;gap:4px}
+.b .ceo b{font-family:"Noto Serif KR",serif;font-size:1.2rem}
+.b .ceo span{color:var(--b-mute);font-size:.9rem}
+.b .stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--b-line)}
+.b .stats div{padding:28px 40px;border-right:1px solid var(--b-line)}
+.b .stats div:last-child{border:0}
+.b .stats b{display:block;font-family:"Noto Serif KR",serif;font-size:2rem;color:var(--b-brass);font-variant-numeric:tabular-nums}
+.b .stats span{color:var(--b-mute);font-size:.9rem}
+.b .svc{padding:48px 40px;display:grid;gap:0}
+.b .row{display:grid;grid-template-columns:180px 1fr auto;gap:24px;padding:22px 0;border-top:1px solid var(--b-line);align-items:center}
+.b .row:last-child{border-bottom:1px solid var(--b-line)}
+.b .row h3{font-family:"Noto Serif KR",serif;margin:0;font-size:1.15rem}
+.b .row p{margin:0;color:var(--b-mute);font-size:.95rem}
+.b .row a{color:var(--b-brass);text-decoration:none;font-size:.9rem;white-space:nowrap}
+.b .tools{background:var(--b-panel);padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.b .tools h3{font-family:"Noto Serif KR",serif;font-size:1.4rem;margin:0 0 8px}
+.b .tools p{margin:0;color:var(--b-mute)}
+.b .result{border:1px solid var(--b-line);padding:22px;display:grid;gap:8px}
+.b .result .k{color:var(--b-mute);font-size:.88rem}
+.b .result .v{font-family:"Noto Serif KR",serif;font-size:1.9rem;color:var(--b-brass)}
+
+/* ===== C: 세무 리포트 ===== */
+.c{--c-bg:#FBF8EC;--c-paper:#ffffff;--c-ink:#14273D;--c-mute:#4f6176;--c-acc:#0165C3;--c-line:#e4e0cf;--c-good:#14273D;
+  background:var(--c-bg);color:var(--c-ink);font-family:"IBM Plex Sans KR",sans-serif}
+.c nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 28px;background:var(--c-paper);border-bottom:1px solid var(--c-line);flex-wrap:wrap}
+.c .logo{font-weight:700}
+.c .logo i{font-style:normal;color:var(--c-acc)}
+.c nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;font-size:.9rem;color:var(--c-mute);flex-wrap:wrap}
+.c .btn{background:var(--c-acc);color:#FBF8EC;border:0;border-radius:6px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}
+.c .hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:48px 28px;align-items:center}
+.c .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:#FBF8EC;background:var(--c-acc);padding:3px 8px;border-radius:4px}
+.c h2{font-size:2.2rem;line-height:1.3;margin:14px 0 14px;font-weight:700;text-wrap:balance}
+.c .lead{color:var(--c-mute);max-width:42ch;margin:0 0 20px}
+.c .calc{background:var(--c-paper);border:1px solid var(--c-line);border-radius:10px;padding:22px;display:grid;gap:14px}
+.c .calc .head{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.c .calc .head span{font-family:"IBM Plex Mono",monospace;font-size:.75rem;color:var(--c-mute);font-weight:500}
+.c label{display:grid;gap:6px;font-size:.88rem;color:var(--c-mute)}
+.c input[type=range]{width:100%;accent-color:var(--c-acc)}
+.c .val{font-variant-numeric:tabular-nums;color:var(--c-ink);font-weight:700}
+.c table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.93rem}
+.c td{padding:8px 0;border-top:1px solid var(--c-line)}
+.c td:last-child{text-align:right}
+.c tr.save td{color:var(--c-good);font-weight:700;font-size:1.05rem;background:#FFBF04;padding-inline:10px}
+.c .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--c-line);border-block:1px solid var(--c-line)}
+.c .kpi div{background:var(--c-paper);padding:20px 28px}
+.c .kpi b{font-size:1.6rem;font-variant-numeric:tabular-nums}
+.c .kpi span{display:block;color:var(--c-mute);font-size:.85rem}
+.c .svc{padding:36px 28px 44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.c .svc div{background:var(--c-paper);border:1px solid var(--c-line);border-radius:10px;padding:20px}
+.c .svc .code{font-family:"IBM Plex Mono",monospace;font-size:.75rem;color:var(--c-mute)}
+.c .svc h3{margin:6px 0 6px;font-size:1.05rem}
+.c .svc p{margin:0;color:var(--c-mute);font-size:.9rem}
+
+@media (max-width:760px){
+  .a .hero,.a .quiz,.b .hero,.b .tools,.c .hero{grid-template-columns:1fr}
+  .a .svc,.c .svc,.b .stats,.c .kpi{grid-template-columns:1fr}
+  .b .stats div{border-right:0;border-bottom:1px solid var(--b-line)}
+  .b .row{grid-template-columns:1fr}
+  .a nav ul,.b nav ul,.c nav ul{display:none}
+  .a h2{font-size:1.8rem}.b h2{font-size:1.9rem}.c h2{font-size:1.7rem}
+  .a .hero,.a .svc,.a .quiz,.a nav{padding-left:20px;padding-right:20px}
+  .b .hero,.b .svc,.b .tools,.b nav,.b .stats div{padding-left:20px;padding-right:20px}
+  .c .hero,.c .svc,.c nav,.c .kpi div{padding-left:20px;padding-right:20px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="shell">
+  <header class="intro">
+    <h1>에이블세무회계 메인 화면 시안 3가지</h1>
+    <p>지금 사이트의 내용(대표 소개, 업종별 서비스, 자가진단, 계산기, 상담)은 그대로 두고, 첫 화면 구성과 분위기만 다르게 잡았어요. 색은 노션의 브랜드 컬러 가이드(시즌2)를 따랐어요. 마음에 드는 시안이나 섞고 싶은 부분을 알려주세요.</p>
+    <nav class="jump" aria-label="시안 바로가기">
+      <a href="#a">A 클리닉 화이트</a><a href="#b">B 프라이빗 뱅킹</a><a href="#c">C 세무 리포트</a>
+    </nav>
+  </header>
+
+  <!-- A -->
+  <section id="a">
+    <div class="label"><b>A. 클리닉 화이트</b><span>크림 화이트 바탕에 에이블 블루 버튼, 노랑은 형광펜처럼 한 군데만. 밝고 읽기 편해요. 자가진단을 첫 화면 바로 아래에 둡니다.</span></div>
+    <div class="frame a">
+      <nav><div class="logo">ABLE<small>에이블세무회계</small></div>
+        <ul><li>대표 소개</li><li>서비스</li><li>요금제</li><li>세무 도구</li><li>후기</li></ul>
+        <button class="btn" type="button">상담 신청</button></nav>
+      <div class="hero">
+        <div>
+          <div class="eyebrow">전국 300+ 병의원 전담 메디컬 세무</div>
+          <h2>진료에만 전념하세요.<br>세무 리스크는 <mark>에이블이 해결</mark>합니다.</h2>
+          <p class="lead">비급여 현금매출, 페이닥터 4대보험, 의료장비 세액공제, MSO 전환까지. 빅4 회계법인 TAX 본부 출신 고혜진 대표회계사가 직접 챙깁니다.</p>
+          <div class="ctas"><button class="btn" type="button">3분 세무 자가진단</button><button class="btn ghost" type="button">무료 상담 신청</button></div>
+        </div>
+        <div class="card">
+          <div class="stat"><span>세무조사 방어 성공</span><b>24건</b></div>
+          <div class="stat"><span>평균 세액 절감율</span><b>32%</b></div>
+          <div class="stat"><span>성실신고 무사고율</span><b>99.8%</b></div>
+        </div>
+      </div>
+      <div class="svc">
+        <div><h3>병의원</h3><p>분기 가결산, 비급여 소명, 사전 모의 세무조사, MSO 설계</p></div>
+        <div><h3>스타트업</h3><p>정부지원사업 증빙, 창업 세액감면, VC 투자용 K-GAAP 장부</p></div>
+        <div><h3>크리에이터</h3><p>소득세 최대 100% 감면, 애드센스 외화 소명, 법인 전환</p></div>
+      </div>
+      <div class="quiz">
+        <div><div class="eyebrow">자가진단 · 1 / 3</div><h3>우리 병원은 어떤 플랜이 맞을까요?</h3><p>3문항만 답하면 세무조사 리스크와 추천 플랜을 바로 알려드려요.</p></div>
+        <div class="opts" id="a-opts">
+          <button type="button" aria-pressed="true">비급여 비중이 높아요<small>피부과, 성형외과 등</small></button>
+          <button type="button" aria-pressed="false">건보 급여 비중이 높아요<small>치과, 내과, 통증의학과 등</small></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- B -->
+  <section id="b">
+    <div class="label"><b>B. 프라이빗 뱅킹</b><span>네이비 잉크 바탕에 골든 옐로 강조, 명조 제목. 릴스 화면과 가장 비슷하고 묵직한 신뢰감. 대표 회계사를 앞에 세웁니다.</span></div>
+    <div class="frame b">
+      <nav><div class="logo">ABLE TAX</div>
+        <ul><li>대표 소개</li><li>서비스</li><li>요금제</li><li>세무 도구</li><li>후기</li></ul>
+        <button class="btn ghost" type="button">상담 신청</button></nav>
+      <div class="hero">
+        <div>
+          <div class="eyebrow">MEDICAL TAX PARTNER</div>
+          <h2>원장님의 진료 시간을<br><span style="color:var(--b-brass)">세금이 빼앗지 않도록</span></h2>
+          <p class="lead">300곳 이상의 병의원 기장 경험으로 세무조사 리스크를 미리 막고, 대표회계사가 모든 신고를 최종 검수합니다.</p>
+          <div class="ctas"><button class="btn" type="button">무료 상담 신청</button><button class="btn ghost" type="button">세무 자가진단</button></div>
+        </div>
+        <div class="ceo"><b>고혜진 대표회계사</b><span>CPA 2015 · EY 안진, KPMG 삼정 세무자문본부</span><span>2024 벤처기업협회 만족도 1위 (4.92점)</span></div>
+      </div>
+      <div class="stats">
+        <div><b>300+</b><span>병의원 전담 기장</span></div>
+        <div><b>24건</b><span>세무조사 방어 성공</span></div>
+        <div><b>32%</b><span>평균 세액 절감율</span></div>
+      </div>
+      <div class="svc">
+        <div class="row"><h3>병의원</h3><p>비급여 소명 방어, 페이닥터 네트 계약, 의료장비 세액공제, MSO 구조화</p><a href="#b">자세히 보기 →</a></div>
+        <div class="row"><h3>스타트업</h3><p>정부지원사업 증빙, 창업중소기업 세액감면, TIPS·VC 투자용 장부</p><a href="#b">자세히 보기 →</a></div>
+        <div class="row"><h3>크리에이터</h3><p>청년 창업 소득세 감면, 외화 수입 영세율, MCN 계약 세무 검토</p><a href="#b">자세히 보기 →</a></div>
+      </div>
+      <div class="tools">
+        <div><div class="eyebrow">법인전환 시뮬레이션</div><h3>법인으로 바꾸면 얼마나 줄까요?</h3><p>연 순이익 8,000만 원 기준 예시예요. 슬라이더로 직접 바꿔볼 수 있게 만듭니다.</p></div>
+        <div class="result"><span class="k">개인 종합소득세</span><span>1,478만 원</span><span class="k">법인 전환 후 법인세</span><span>792만 원</span><span class="k">연간 예상 절세액</span><span class="v">686만 원</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C -->
+  <section id="c">
+    <div class="label"><b>C. 세무 리포트</b><span>보고서처럼 정돈된 숫자 중심. 계산기를 첫 화면에 올리고, 절세액만 골든 옐로로 강조합니다.</span></div>
+    <div class="frame c">
+      <nav><div class="logo"><i>ABLE</i> 에이블세무회계</div>
+        <ul><li>대표 소개</li><li>서비스</li><li>요금제</li><li>세무 도구</li><li>후기</li></ul>
+        <button class="btn" type="button">상담 신청</button></nav>
+      <div class="hero">
+        <div>
+          <span class="tag">병의원 · 스타트업 · 크리에이터</span>
+          <h2>내 세금, 숫자로 먼저 확인하고 상담하세요</h2>
+          <p class="lead">빅4 출신 회계사가 만든 계산기로 예상 세액을 바로 보고, 결과 그대로 무료 검토를 신청할 수 있어요.</p>
+          <button class="btn" type="button">이 결과로 무료 검토 신청</button>
+        </div>
+        <div class="calc">
+          <div class="head">법인전환 절세 계산기<span>지방세 10% 포함 · 예시</span></div>
+          <label for="c-range">개인사업자 연 순이익 <span class="val" id="c-val">8,000만 원</span>
+            <input id="c-range" type="range" min="3000" max="30000" step="500" value="8000"></label>
+          <table><tbody>
+            <tr><td>개인 종합소득세</td><td id="c-p">1,478만 원</td></tr>
+            <tr><td>법인 전환 후 법인세</td><td id="c-c">792만 원</td></tr>
+            <tr class="save"><td>연간 예상 절세액</td><td id="c-s">686만 원</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="kpi">
+        <div><b>300+</b><span>병의원 전담 기장</span></div>
+        <div><b>32%</b><span>평균 세액 절감율</span></div>
+        <div><b>99.8%</b><span>성실신고 무사고율</span></div>
+      </div>
+      <div class="svc">
+        <div><span class="code">MEDICAL</span><h3>병의원</h3><p>분기 가결산 세액 예측, 비급여 소명, 사전 모의 세무조사</p></div>
+        <div><span class="code">STARTUP</span><h3>스타트업</h3><p>정부지원사업 증빙, 창업 세액감면, R&amp;D 세액공제</p></div>
+        <div><span class="code">CREATOR</span><h3>크리에이터</h3><p>소득세 감면, 외화 수입 영세율, 프리랜서 원천세 대행</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+document.querySelectorAll('#a-opts button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#a-opts button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');
+}));
+// 2026 종합소득세 누진세율 (지방세 10% 포함) vs 법인세 (2억 이하 9%, 200억 이하 19%)
+function incomeTax(n){const br=[[1400,.06,0],[5000,.15,126],[8800,.24,576],[15000,.35,1544],[30000,.38,1994],[50000,.40,2594],[1e9,.42,3594]];
+  for(const [lim,r,d] of br){if(n<=lim)return Math.max(0,(n*r-d)*1.1)}}
+function corpTax(n){return (n<=20000?n*.09:20000*.09+(n-20000)*.19)*1.1}
+const f=v=>Math.round(v).toLocaleString('ko-KR')+'만 원';
+const r=document.getElementById('c-range');
+function upd(){const n=+r.value,p=incomeTax(n),c=corpTax(n);
+  document.getElementById('c-val').textContent=f(n);document.getElementById('c-p').textContent=f(p);
+  document.getElementById('c-c').textContent=f(c);document.getElementById('c-s').textContent=f(p-c)}
+r.addEventListener('input',upd);upd();
+</script>
